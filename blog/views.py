@@ -5,6 +5,8 @@ from .models import Post
 
 from django.utils import timezone
 
+from django.shortcuts import render, get_object_or_404
+
 
 #método (def) llamado post_list que toma un request y hace un return de un método render que renderizará (construirá)
 #nuestra plantilla blog/post_list.html.
@@ -15,3 +17,8 @@ def post_list(request):
     # archivo 'blog/post_list.html' como plantilla
     # {'posts': posts} : Se envia el post a la plantilla html
     return render(request, 'blog/post_list.html', {'posts': posts})
+
+# Busca el post especificado en pk
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/post_detail.html', {'post': post})
